@@ -1,4 +1,5 @@
 const allPlayers = () =>{
+    document.getElementById('player-container').innerHTML="";
     const searchValue = document.getElementById('search-box').value;
     const url = `https://www.thesportsdb.com/api/v1/json/2/searchplayers.php?p=${searchValue}`
     console.log(url)
@@ -38,11 +39,25 @@ const details = (info) =>{
     .then((data) =>setDetails(data.players[0]));
 };
 const setDetails = (info) =>{
-    document.getElementById("details-conatainer").innerHTML= `
-<div>
-<img src="" alt="">
-<h1>name:${info.strPlayer}</h1>
-</div>
-`;
+    console.log(info.strGender);
+//   const detail = document.getElementById('details-conatainer');
+//   detail.textContent= ""
+//   detail.innerHTML =`<img src=${info.strThumb} alt="">`
 
-}
+if (info.strGender == "Male") {
+    document.getElementById("male").style.display = "block";
+    document.getElementById("female").style.display = "none";
+  } else {
+    document.getElementById("male").style.display = "none";
+    document.getElementById("female").style.display = "block";
+  }
+
+  document.getElementById("details-container").innerHTML = `
+ <div>
+ <img src="" alt="">
+ <h1>Name:${info.strPlayer}</h1>
+ </div>
+    `;
+
+
+};
